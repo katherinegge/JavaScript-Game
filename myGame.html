@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Breakout Game</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      canvas {
+        background: #FFEBF2;
+        display: block;
+        margin: auto;
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="1400" height="640"></canvas>
+
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d");
+      const ballRadius = 10;
+
+      let x = myCanvas.width / 2;
+      let y = myCanvas.height - 30;
+      let dx = 3;
+      let dy = -3;
+
+      function drawBall() {
+        ctx.beginPath();
+        ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+        ctx.fillStyle = "#FF246D";
+        ctx.fill();
+        ctx.closePath();
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+        drawBall();
+        x += dx;
+        y += dy;
+
+        if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+          dx = -dx;
+        }
+        if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+          dy = -dy;
+        }
+      }
+      
+      setInterval(draw, 10);
+
+    </script>
+  </body>
+</html>
